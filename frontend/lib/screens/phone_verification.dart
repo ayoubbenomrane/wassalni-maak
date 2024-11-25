@@ -9,7 +9,10 @@ class PhoneVerificationScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text('Enter the code you’ve just received', style: Theme.of(context).textTheme.bodyText1),
+            Text('Enter the code you’ve just received',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge), // Updated for new TextTheme
             SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
