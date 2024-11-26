@@ -6,6 +6,8 @@ import 'screens/profile_setup.dart';
 import 'screens/login.dart';
 import 'screens/welcome.dart';
 import 'screens/verification_screen.dart';
+import 'screens/offer_ride.dart';
+import 'screens/find_ride.dart';
 
 void main() {
   runApp(MyApp());
@@ -66,6 +68,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/verification_screen': (context) =>
             VerificationScreen(), // Add VerificationScreen route
+        '/OfferRidePage': (context) => OfferRidePage(),
+        '/FindRidePage': (context) => FindRidePage(),
       },
     );
   }
