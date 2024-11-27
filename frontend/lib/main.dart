@@ -10,10 +10,12 @@ import 'screens/verification_screen.dart';
 import 'screens/offer_ride.dart';
 import 'screens/find_ride.dart';
 import 'screens/ride_list.dart';
+import 'screens/welcome_clicked.dart';
+import 'screens/driver_profile.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: MyApp(),
+    home: DriverProfilePage(),
   ));
 }
 
