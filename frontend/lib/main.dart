@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/ride_detail.dart';
 import 'screens/signup.dart';
 import 'screens/phone_verification.dart';
 import 'screens/set_password.dart';
@@ -6,9 +7,16 @@ import 'screens/profile_setup.dart';
 import 'screens/login.dart';
 import 'screens/welcome.dart';
 import 'screens/verification_screen.dart';
+import 'screens/offer_ride.dart';
+import 'screens/find_ride.dart';
+import 'screens/ride_list.dart';
+import 'screens/welcome_clicked.dart';
+import 'screens/driver_profile.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    home: DriverProfilePage(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -66,6 +74,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/verification_screen': (context) =>
             VerificationScreen(), // Add VerificationScreen route
+        '/OfferRidePage': (context) => OfferRidePage(),
+        '/FindRidePage': (context) => FindRidePage(),
       },
     );
   }

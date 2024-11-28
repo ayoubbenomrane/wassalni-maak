@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'offer_ride.dart';
+import 'find_ride.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -44,7 +46,13 @@ class WelcomeScreen extends StatelessWidget {
 
               // Find a Ride Button
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FindRidePage()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
                       Colors.redAccent, // Corrected backgroundColor usage
@@ -64,6 +72,11 @@ class WelcomeScreen extends StatelessWidget {
               // Offer a Ride Button (Now in red as per previous style)
               ElevatedButton(
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const OfferRidePage()),
+                  );
                   // Add your navigation logic for offering a ride here
                 },
                 style: ElevatedButton.styleFrom(

@@ -52,8 +52,10 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/Capture d'écran 2024-11-24 161133.png
-    - assets/ayoub.png
+
+
+    - assets/
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
