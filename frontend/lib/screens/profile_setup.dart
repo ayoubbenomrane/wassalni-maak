@@ -30,7 +30,9 @@ class ProfileSetupScreen extends StatelessWidget {
                 SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/login');
+                    },
                     child: Text('Save'),
                   ),
                 ),

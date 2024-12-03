@@ -10,6 +10,7 @@ class RideCard extends StatelessWidget {
   final String distance;
   final int totalSeats;
   final int reservedSeats;
+  final Function() onTap; // New parameter to handle tap
 
   RideCard({
     required this.timeStart,
@@ -21,133 +22,132 @@ class RideCard extends StatelessWidget {
     required this.distance,
     required this.totalSeats,
     required this.reservedSeats,
+    required this.onTap, // Accepting tap callback
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.only(bottom: 16),
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  timeStart,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                Spacer(),
-                Text(
-                  price,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.red),
-                ),
-              ],
-            ),
-            SizedBox(height: 8),
-            // Horizontal Line with Circles
-            Row(
-              children: [
-                // Start Circle
-                Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 5,
-                      backgroundColor: Colors.red,
-                      child: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(width: 8),
-                // Connecting Line
-                Expanded(
-                  child: Container(
-                    height: 2,
-                    color: Colors.red,
+    return GestureDetector(
+      onTap: onTap, // Invoke the callback when the card is tapped
+      child: Card(
+        margin: EdgeInsets.only(bottom: 16),
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    timeStart,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                ),
-                SizedBox(width: 8),
-                // End Circle
-                Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 5,
-                      backgroundColor: Colors.red,
-                      child: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.white,
+                  Spacer(),
+                  Text(
+                    price,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.red),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 5,
+                        backgroundColor: Colors.red,
+                        child: CircleAvatar(
+                          radius: 3,
+                          backgroundColor: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 8),
-            // Start and End Labels
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  start,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  end,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(height: 8),
-            Row(
-              children: [
-                for (int i = 1; i <= totalSeats; i++)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Icon(
-                      Icons.airline_seat_recline_normal,
-                      size: 20,
-                      color: i <= reservedSeats ? Colors.red : Colors.grey,
+                    ],
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Container(
+                      height: 2,
+                      color: Colors.red,
                     ),
                   ),
-              ],
-            ),
-            Divider(height: 20, thickness: 1),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.grey.shade300,
-                  child: Icon(Icons.person, color: Colors.white),
-                ),
-                SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      driver,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                  SizedBox(width: 8),
+                  Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 5,
+                        backgroundColor: Colors.red,
+                        child: CircleAvatar(
+                          radius: 3,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    start,
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    end,
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  for (int i = 1; i <= totalSeats; i++)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: Icon(
+                        Icons.airline_seat_recline_normal,
+                        size: 20,
+                        color: i <= reservedSeats ? Colors.red : Colors.grey,
+                      ),
                     ),
-                    Text(
-                      distance,
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              Divider(height: 20, thickness: 1),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.grey.shade300,
+                    child: Icon(Icons.person, color: Colors.white),
+                  ),
+                  SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        driver,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        distance,
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -219,6 +219,10 @@ class RideListPage extends StatelessWidget {
               distance: ride['distance'],
               totalSeats: ride['totalSeats'],
               reservedSeats: ride['reservedSeats'],
+              onTap: () {
+                // Navigate to the ride details page
+                Navigator.pushNamed(context, '/rideDetail');
+              },
             );
           },
         ),
@@ -235,6 +239,37 @@ class RideListPage extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.inbox), label: 'Inbox'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
+      ),
+    );
+  }
+}
+
+class RideDetailPage extends StatelessWidget {
+  final Map<String, dynamic> ride;
+
+  RideDetailPage({required this.ride});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Ride Details'),
+        backgroundColor: Colors.red,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Start: ${ride['start']}'),
+            Text('End: ${ride['end']}'),
+            Text('Time: ${ride['timeStart']} - ${ride['timeEnd']}'),
+            Text('Price: ${ride['price']}'),
+            Text('Driver: ${ride['driver']}'),
+            Text('Distance: ${ride['distance']}'),
+            // Add more details or information as required
+          ],
+        ),
       ),
     );
   }

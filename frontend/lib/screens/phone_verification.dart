@@ -20,7 +20,9 @@ class PhoneVerificationScreen extends StatelessWidget {
             ),
             SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/setPassword');
+              },
               child: Text('Verify Code'),
             ),
             TextButton(

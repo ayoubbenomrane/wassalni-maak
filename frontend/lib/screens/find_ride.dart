@@ -146,6 +146,7 @@ class _FindRidePageState extends State<FindRidePage> {
               child: ElevatedButton(
                 onPressed: () {
                   // Add navigation or functionality
+                  Navigator.pushNamed(context, '/rideList');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,

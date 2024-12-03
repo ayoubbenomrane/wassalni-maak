@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/ride_detail.dart';
 import 'screens/signup.dart';
 import 'screens/phone_verification.dart';
 import 'screens/set_password.dart';
@@ -10,13 +9,14 @@ import 'screens/verification_screen.dart';
 import 'screens/offer_ride.dart';
 import 'screens/find_ride.dart';
 import 'screens/ride_list.dart';
-import 'screens/welcome_clicked.dart';
+import 'screens/profile_page.dart';
 import 'screens/driver_profile.dart';
+import 'screens/payment_page.dart';
+import 'screens/ride_detail.dart';
+import 'screens/intro_page.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: DriverProfilePage(),
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Waggalni Maak',
+      title: 'Wassalni Maak',
       theme: ThemeData(
         primaryColor: const Color(0xFFFF5C5C),
         hintColor: const Color(0xFFFF5C5C),
@@ -64,18 +64,25 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: '/signup',
+      initialRoute: '/intro',
       routes: {
         '/signup': (context) => SignUpScreen(),
         '/welcome': (context) => WelcomeScreen(),
+        '/profile': (context) => ProfilePage(),
+        '/verificationScreen': (context) => VerificationScreen(),
+        '/rideList': (context) => RideListPage(),
+        '/rideDetail': (context) => RideDetail(),
+        '/payment': (context) => PaymentPage(),
+        // '/feedback': (context) => FeedbackPage(),
+        '/driverProfile': (context) => DriverProfilePage(),
         '/phoneVerification': (context) => PhoneVerificationScreen(),
         '/setPassword': (context) => SetPasswordScreen(),
         '/profileSetup': (context) => ProfileSetupScreen(),
         '/login': (context) => LoginScreen(),
-        '/verification_screen': (context) =>
-            VerificationScreen(), // Add VerificationScreen route
+        '/verification_screen': (context) => VerificationScreen(),
         '/OfferRidePage': (context) => OfferRidePage(),
-        '/FindRidePage': (context) => FindRidePage(),
+        '/FindRide': (context) => FindRidePage(),
+        '/intro': (context) => IntroPage(),
       },
     );
   }

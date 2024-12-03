@@ -97,9 +97,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   items: _genders
                       .map((gender) => DropdownMenuItem(
-                    value: gender,
-                    child: Text(gender),
-                  ))
+                            value: gender,
+                            child: Text(gender),
+                          ))
                       .toList(),
                   onChanged: (value) {
                     setState(() {
@@ -110,6 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
+                    Navigator.pushNamed(context, '/phoneVerification');
                     if (_formKey.currentState!.validate()) {
                       // Handle the sign-up logic
                     }
@@ -152,10 +153,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Navigator.pushNamed(context, '/welcome');
                         },
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black, backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.white,
                           side: BorderSide(color: Colors.grey),
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -169,10 +171,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Navigator.pushNamed(context, '/profileSetup');
                         },
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black, backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.white,
                           side: BorderSide(color: Colors.grey),
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),

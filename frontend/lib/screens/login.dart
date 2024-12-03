@@ -34,10 +34,7 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigate to WelcomeScreen when Log In button is pressed
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => WelcomeScreen()),
-                );
+                Navigator.pushNamed(context, '/welcome');
               },
               child: const Text('Log In'),
             ),

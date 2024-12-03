@@ -14,7 +14,9 @@ class SetPasswordScreen extends StatelessWidget {
             PasswordInputField(label: 'Confirm Password'),
             SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/profileSetup');
+              },
               child: Text('Register'),
             ),
           ],

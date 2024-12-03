@@ -35,8 +35,7 @@ class ProfilePage extends StatelessWidget {
               backgroundColor: Colors.red,
               child: CircleAvatar(
                 radius: 55,
-                backgroundImage: AssetImage(
-                    'assets/jotaro.jpeg'), // Replace with your avatar image asset
+                backgroundImage: AssetImage('assets/jotaro.jpeg'),
               ),
             ),
             SizedBox(height: 20),
