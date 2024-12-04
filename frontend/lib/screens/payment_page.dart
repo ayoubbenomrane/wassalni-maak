@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/chat.dart';
 
 class PaymentPage extends StatefulWidget {
   @override
@@ -35,6 +36,109 @@ class _PaymentPageState extends State<PaymentPage> {
     },
   ];
 
+  void _showPaymentSuccessDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent closing by tapping outside
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.check_circle,
+                    color: Color(0xFFEC5F5F), size: 64),
+                const SizedBox(height: 16),
+                const Text(
+                  'Payment Success',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Your money has been successfully sent to Ayoub Ben Omrane',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black54),
+                ),
+                const SizedBox(height: 16),
+                const Divider(thickness: 1),
+                const SizedBox(height: 8),
+                const Text(
+                  'Amount',
+                  style: TextStyle(color: Colors.black54),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  '25 Dt',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'How is your ride?',
+                  style: TextStyle(color: Colors.black54),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => (ChatServicePage())));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text('okay', style: TextStyle(fontSize: 16)),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _confirmPayment() {
+    final selectedMethod = paymentMethods[_selectedPaymentMethod];
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Payment Confirmation'),
+          content: Text(
+              'You have selected the payment method: ${selectedMethod['title']}. Do you want to confirm?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close confirmation dialog
+                _showPaymentSuccessDialog(); // Show success dialog
+              },
+              child: const Text('Confirm'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,19 +154,19 @@ class _PaymentPageState extends State<PaymentPage> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context); // Returns to the previous screen
+            Navigator.pop(context);
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // User Information Section
-            Container(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // User Information Section
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.red.shade50,
@@ -73,7 +177,8 @@ class _PaymentPageState extends State<PaymentPage> {
                   CircleAvatar(
                     radius: 30,
                     backgroundColor: Colors.red.shade100,
-                    child: Icon(Icons.person, size: 40, color: Colors.red),
+                    child:
+                        const Icon(Icons.person, size: 40, color: Colors.red),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -90,7 +195,8 @@ class _PaymentPageState extends State<PaymentPage> {
                         SizedBox(height: 4),
                         Row(
                           children: [
-                            Icon(Icons.star, color: Colors.orange, size: 16),
+                            Icon(Icons.star,
+                                color: Color(0xFFEC5F5F), size: 16),
                             Text(
                               '4.5 / 5 (13 Ratings)',
                               style: TextStyle(
@@ -113,34 +219,62 @@ class _PaymentPageState extends State<PaymentPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-            // Payment Method Section
-            const Text(
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
               'Select payment method',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
             ),
-            const SizedBox(height: 16),
-            // Payment Methods List
-            ...List.generate(paymentMethods.length, (index) {
-              final method = paymentMethods[index];
-              return PaymentMethodTile(
-                icon: method['icon'],
-                title: method['title'],
-                subtitle: method['subtitle'],
-                isSelected: _selectedPaymentMethod == index,
-                color: method['color'],
-                onTap: () {
-                  setState(() {
-                    _selectedPaymentMethod = index; // Update selected method
-                  });
-                },
-              );
-            }),
-          ],
-        ),
+          ),
+          const SizedBox(height: 16),
+          // Payment Methods List
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: paymentMethods.length,
+              itemBuilder: (context, index) {
+                final method = paymentMethods[index];
+                return PaymentMethodTile(
+                  icon: method['icon'],
+                  title: method['title'],
+                  subtitle: method['subtitle'],
+                  isSelected: _selectedPaymentMethod == index,
+                  color: method['color'],
+                  onTap: () {
+                    setState(() {
+                      _selectedPaymentMethod = index; // Update selected method
+                    });
+                  },
+                );
+              },
+            ),
+          ),
+          // Confirmation Button
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _confirmPayment,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFEC5F5F),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  'Confirm Payment',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -171,10 +305,10 @@ class PaymentMethodTile extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.green.shade50 : Colors.grey.shade200,
+          color: isSelected ? Color(0xFFEC5F5F) : Colors.grey.shade200,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? Colors.green : Colors.transparent,
+            color: isSelected ? Color(0xFFEC5F5F) : Colors.transparent,
             width: 2,
           ),
         ),
@@ -211,4 +345,10 @@ class PaymentMethodTile extends StatelessWidget {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: PaymentPage(),
+  ));
 }

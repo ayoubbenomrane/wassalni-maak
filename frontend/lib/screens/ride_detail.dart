@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/payment_page.dart';
+import 'ride_booked.dart';
 
 class RideDetail extends StatelessWidget {
   @override
@@ -192,8 +194,8 @@ class RideDetail extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Add request ride logic here
-                  print('Request for ride clicked!');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => (PaymentPage())));
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),

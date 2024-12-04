@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'chat.dart';
 
 class RideConfirmationPage extends StatelessWidget {
   @override
@@ -32,7 +33,12 @@ class RideConfirmationPage extends StatelessWidget {
               // Thanks button
               ElevatedButton(
                 onPressed: () {
-                  // Add your button logic here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatServicePage(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.redAccent,
@@ -52,6 +58,35 @@ class RideConfirmationPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      // Bottom Navigation Bar
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex:
+            1, // You can set this dynamically based on the selected index
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_car),
+            label: 'Your rides',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Publish',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.inbox),
+            label: 'Inbox',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }
