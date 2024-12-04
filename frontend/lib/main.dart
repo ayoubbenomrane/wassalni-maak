@@ -14,6 +14,8 @@ import 'screens/driver_profile.dart';
 import 'screens/payment_page.dart';
 import 'screens/ride_detail.dart';
 import 'screens/intro_page.dart';
+import 'screens/chat.dart';
+import 'screens/ride_booked.dart';
 
 void main() {
   runApp(MyApp());
