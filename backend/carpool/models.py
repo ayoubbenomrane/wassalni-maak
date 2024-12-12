@@ -1,13 +1,21 @@
 from django.db import models
 from core.models import Driver,User
+
 # Create your models here.
 
+class Option(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
 
 class Covoiturage(models.Model):
     departure_id = models.PositiveIntegerField()
     destination_id = models.PositiveIntegerField()
     addresses = models.JSONField()
+    time = models.DateTimeField()
     available_seats = models.PositiveIntegerField()
+    options = models.ManyToManyField(Option, related_name='covoiturages', blank=True)
     price = models.FloatField()
     driver = models.ForeignKey(User, related_name="covoiturages", on_delete=models.CASCADE)
 
@@ -53,3 +61,4 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback by {self.author.username} about {self.about.username} - Rating: {self.rating}"
+

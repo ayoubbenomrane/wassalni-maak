@@ -274,3 +274,8 @@ class RideDetailPage extends StatelessWidget {
     );
   }
 }
+
+void fetchRides() {
+  const url =
+      'https://bcde-196-203-181-122.ngrok-free.app/carpool/covoiturages/';
+}
