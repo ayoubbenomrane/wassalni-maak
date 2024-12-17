@@ -6,7 +6,7 @@ from ..schemas import authentication
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 
 router=APIRouter(
-    tags=['authentification']
+    tags=['user']
 )
 
 @router.post('/login',response_model=authentication.Token)
